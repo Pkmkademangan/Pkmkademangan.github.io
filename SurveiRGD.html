@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Survei Kepuasan Pasien | UPTD Puskesmas Kademangan</title>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+    
+<body>
+    <form id="form">
+        <h1>UPTD Puskesmas Kademangan</h1>
+        <h2>Survei Kepuasan Pasien - Ruang Gawat Darurat</h2>
+        <div class="form-element">
+            <span>Nama</span>
+            <input type="text" name="Nama" required placeholder="Nama">
+        </div>
+
+        <div class="emoji-selector">
+            <input id="tdkpuas" type="radio" name="Kepuasan" value="Tidak Puas" />
+            <label class="drinkemoji-cc tdkpuas"for="tdkpuas"></label>
+            <input id="puas" type="radio" name="Kepuasan" value="Puas" checked />
+            <label class="drinkemoji-cc puas"for="puas"></label>
+
+        </div>
+        
+        <div class="form-element">
+            <span>Kritik</span>
+            <input type="text" name="Kritik" required placeholder="Kritik">
+        </div>
+
+        <div class="form-element">
+            <span>Saran</span>
+            <input type="text" name="Saran" required placeholder="Saran">
+        </div>
+
+        <button id="submit" type="submit">Submit</button>
+
+        <h2> </h2>
+        
+        <div class="footertext">
+            <span>UPTD Puskesmas Kademangan | Form feedback oleh dr. Ryan Majid</span>
+        </div>
+
+    </form>   
+</body>
+    
+<script>
+   const form = document.querySelector("#form")
+    const submit = document.querySelector("#submit")
+  const scriptURL = 'https://script.google.com/macros/s/AKfycbzTY455FwasUvDUyzDbl88goC8KCpjgarJqXK3kO6jt9HdseP93gnChgCi62aC45fGz/exec'
+
+  form.addEventListener('submit', e => {
+      submit.disabled = true
+    e.preventDefault()
+
+    const responseBody = new FormData(form)
+    const TrendBody = responseBody.getAll("TRENDS").join(" ")
+    responseBody.set('TRENDS', TrendBody)
+    fetch(scriptURL, { method: 'POST', body: responseBody })
+      .then(response => { window.location.href = "http://pkmkademangan.github.io/Submitted"; })
+      .catch(error => { alert('Error, Data tidak tersubmit!', error.message)
+                      submit.disabled = false })
+   })
+</script>
+</html>
