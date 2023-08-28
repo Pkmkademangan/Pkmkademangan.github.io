@@ -61,7 +61,7 @@
     const TrendBody = responseBody.getAll("TRENDS").join(" ")
     responseBody.set('TRENDS', TrendBody)
     fetch(scriptURL, { method: 'POST', body: responseBody })
-      .then(response => { window.location.href = "http://ryanmrepo.github.io/Submitted"; })
+      .then(response => { window.location.href = "http://pkmkademangan.github.io/Submitted"; })
       .catch(error => { alert('Error, Data tidak tersubmit!', error.message)
                       submit.disabled = false })
    })
